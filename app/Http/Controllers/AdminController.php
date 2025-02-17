@@ -112,13 +112,14 @@ class AdminController extends Controller
         return redirect('/');
     }
     public function bookings()
-    {
-        if (Auth::check() && Auth::user()->usertype == 'admin') {
-            $data = Booking::all();
-            return view('admin.booking', compact('data'));
-        }
-        return redirect('/')->with('error', 'Akses ditolak.');
+{
+    if (Auth::check() && Auth::user()->usertype == 'admin') {
+        $data = Booking::with('user', 'room')->get(); 
+        return view('admin.booking', compact('data'));
     }
+    return redirect('/')->with('error', 'Akses ditolak.');
+}
+
     public function delete_booking($id)
     {
         $data = Booking::find($id);

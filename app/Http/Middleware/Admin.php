@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Middleware; // Diperbaiki dari App\Http
+namespace App\Http\Middleware; 
 
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth; // Tambahkan ini
+use Illuminate\Support\Facades\Auth; 
 
 class Admin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->usertype == 'admin') { // Diperbaiki
+        if (Auth::check() && Auth::user()->usertype == 'admin') { 
             return $next($request);
         }
         abort(401);

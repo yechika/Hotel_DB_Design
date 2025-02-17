@@ -4,20 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 
-// Public Routes
 Route::get('/', [AdminController::class, 'home']);
 
-// Authentication Routes
 Route::post('/logout', [AdminController::class, 'destroy'])->name('logout');
 
-// Authenticated User Routes
 Route::middleware('auth')->group(function () {
     Route::get('/room_details/{id}', [HomeController::class, 'room_details'])
         ->name('room_details');
     Route::post('/add_booking/{id}', [HomeController::class, 'add_booking']);
 });
 
-// Admin Routes (Protected by 'auth' and 'admin' middleware)
 Route::middleware('auth')->group(function () {
      Route::get('/home', [AdminController::class, 'index'])->name('home');
      Route::get('/create_room', [AdminController::class, 'create_room']);

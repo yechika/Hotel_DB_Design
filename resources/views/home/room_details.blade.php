@@ -79,6 +79,7 @@
                @endif
                <form action="{{ url('add_booking', $room->id) }}" method="Post">
                   @csrf
+                  <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                   <div>
                      <label  for="">Name</label>
                      <input style="cursor: not-allowed;" type="text" name="name"
@@ -105,16 +106,17 @@
                   </div>
                   <div>
                      <label for="">Start Date</label>
-                     <input type="date" name="startDate" id="startDate">
+                     <input type="date" name="startDate" id="startDate" required>
                   </div>
                   <div>
                      <label for="">End Date</label>
-                     <input type="date" name="endDate" id="endDate">
+                     <input type="date" name="endDate" id="endDate" required>
                   </div>
                   <div style="padding-top: 20px;">
                      <input type="submit" value="Book Room" class="btn btn-primary">
                   </div>
                </form>
+
 
             </div>
          </div>
