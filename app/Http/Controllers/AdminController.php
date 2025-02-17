@@ -3,167 +3,206 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\User;
 use App\Models\Room;
 use App\Models\Booking;
 use App\Models\Gallery;
 
-
 class AdminController extends Controller
 {
-    //
-
     public function index()
     {
-        if (Auth::id()) {
-            $usertype = Auth::user()->usertype;
-            if ($usertype == 'user') {
-                $room = Room::all();
-                $gallery = Gallery::all();
-                return view('home.index', compact('room', 'gallery'));
-            } else if ($usertype == 'admin') {
-                return view('admin.index');
-            } else {
-                return redirect()->back();
-            }
+        if (!Auth::check()) {
+            return redirect('/');
         }
+
+        $usertype = Auth::user()->usertype;
+
+        if ($usertype == 'user') {
+            return view('home.index', [
+                'room' => Room::all(),
+                'gallery' => Gallery::all()
+            ]);
+        } elseif ($usertype == 'admin') {
+            return view('admin.index');
+        }
+
+        return redirect()->back();
     }
+
     public function home()
     {
-        $room = Room::all();
-        $gallery = Gallery::all();
-        return view('home.index', compact('room', 'gallery'));
+        return view('home.index', [
+            'room' => Room::all(),
+            'gallery' => Gallery::all()
+        ]);
     }
+
     public function create_room()
     {
-        if (Auth::check() && Auth::user()->usertype == 'admin') {
-            return view('admin.create_room');
+        if (Auth::user()?->usertype !== 'admin') {
+            return redirect('/')->with('error', 'Akses ditolak.');
         }
-        return redirect('/')->with('error', 'Akses ditolak.');
+        return view('admin.create_room');
     }
+
     public function add_room(Request $request)
     {
-        if (Auth::check() && Auth::user()->usertype == 'admin') {
-            $data = new Room();
-            $data->room_title = $request->title;
-            $data->description = $request->description;
-            $data->price = $request->price;
-            $data->wifi = $request->wifi;
-            $data->room_type = $request->type;
-            $image = $request->image;
-            if ($image) {
-                $imagename = time() . '.' . $image->getClientOriginalExtension();
-                $request->image->move('room', $imagename);
-                $data->image = $imagename;
-            }
-            $data->save();
-            return redirect()->back();
+        if (Auth::user()?->usertype !== 'admin') {
+            return redirect('/')->with('error', 'Akses ditolak.');
         }
-        return redirect('/')->with('error', 'Akses ditolak.');
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'wifi' => 'required|boolean',
+            'type' => 'required|string|max:50',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $room = new Room();
+        $room->room_title = $request->title;
+        $room->description = $request->description;
+        $room->price = $request->price;
+        $room->wifi = $request->wifi;
+        $room->room_type = $request->type;
+
+        if ($request->hasFile('image')) {
+            $imagename = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('room'), $imagename);
+            $room->image = $imagename;
+        }
+
+        $room->save();
+        return redirect()->back()->with('success', 'Kamar berhasil ditambahkan.');
     }
+
     public function view_room()
     {
-        if (Auth::check() && Auth::user()->usertype == 'admin') {
-            $data = Room::all();
-
-            return view('admin.view_room', compact('data'));
+        if (Auth::user()?->usertype !== 'admin') {
+            return redirect('/')->with('error', 'Akses ditolak.');
         }
-        return redirect('/')->with('error', 'Akses ditolak.');
+
+        return view('admin.view_room', ['data' => Room::all()]);
     }
+
     public function room_delete($id)
     {
-        $data = Room::find($id);
-        $data->delete();
-        return redirect()->back();
+        Room::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Kamar berhasil dihapus.');
     }
+
     public function room_update($id)
     {
-        $data = Room::find($id);
-        return view('admin.update_room', compact('data'));
+        return view('admin.update_room', [
+            'data' => Room::findOrFail($id)
+        ]);
     }
+
     public function edit_room(Request $request, $id)
     {
-        $data = Room::find($id);
-        $data->room_title = $request->title;
-        $data->description = $request->description;
-        $data->price = $request->price;
-        $data->wifi = $request->wifi;
-        $data->room_type = $request->type;
-        $image = $request->image;
-        if ($image) {
-            $imagename = time() . '.' . $image->getClientOriginalExtension();
-            $request->image->move('room', $imagename);
-            $data->image = $imagename;
+        $room = Room::findOrFail($id);
+        $room->room_title = $request->title;
+        $room->description = $request->description;
+        $room->price = $request->price;
+        $room->wifi = $request->wifi;
+        $room->room_type = $request->type;
+
+        if ($request->hasFile('image')) {
+            $imagename = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('room'), $imagename);
+            $room->image = $imagename;
         }
-        $data->save();
-        return redirect()->back();
+
+        $room->save();
+        return redirect()->back()->with('success', 'Kamar berhasil diperbarui.');
     }
+
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
     }
+
     public function bookings()
-{
-    if (Auth::check() && Auth::user()->usertype == 'admin') {
-        $data = Booking::with('user', 'room')->get(); 
-        return view('admin.booking', compact('data'));
+    {
+        if (Auth::user()?->usertype !== 'admin') {
+            return redirect('/')->with('error', 'Akses ditolak.');
+        }
+
+        return view('admin.booking', [
+            'data' => Booking::with('user', 'room')->get()
+        ]);
     }
-    return redirect('/')->with('error', 'Akses ditolak.');
-}
 
     public function delete_booking($id)
     {
-        $data = Booking::find($id);
-        $data->delete();
-        return redirect()->back();
+        Booking::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Pemesanan berhasil dihapus.');
     }
+
     public function approve_book($id)
     {
-        $booking = Booking::find($id);
+        $booking = Booking::findOrFail($id);
         $booking->status = 'Approve';
         $booking->save();
-        return redirect()->back();
+
+        return redirect()->back()->with('success', 'Pemesanan disetujui.');
     }
+
     public function reject_book($id)
     {
-        $booking = Booking::find($id);
+        $booking = Booking::findOrFail($id);
         $booking->status = 'Rejected';
         $booking->save();
-        return redirect()->back();
+
+        return redirect()->back()->with('success', 'Pemesanan ditolak.');
     }
+
     public function view_gallery()
     {
-        if (Auth::check() && Auth::user()->usertype == 'admin') {
-            $gallery = Gallery::all();
-            return view('admin.gallery', compact('gallery'));
+        if (Auth::user()?->usertype !== 'admin') {
+            return redirect('/')->with('error', 'Akses ditolak.');
         }
-        return redirect('/')->with('error', 'Akses ditolak.');
+
+        return view('admin.gallery', [
+            'gallery' => Gallery::with('user')->get()
+        ]);
     }
+
     public function upload_gallery(Request $request)
     {
-        $data = new Gallery;
-        $image = $request->image;
-        if ($image) {
-            $imagename = time() . '.' . $image->getClientOriginalExtension();
-            $request->image->move('gallery', $imagename);
-            $data->image = $imagename;
-            $data->save();
-            return redirect()->back();
+        if (!Auth::check()) {
+            return redirect('/')->with('error', 'Anda harus login.');
         }
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $gallery = new Gallery();
+        $gallery->user_id = Auth::id(); 
+        $imagename = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('gallery'), $imagename);
+        $gallery->image = $imagename;
+        $gallery->save();
+
+        return redirect()->back()->with('success', 'Gambar berhasil diunggah.');
     }
+
     public function delete_gallery($id)
     {
-        $data = Gallery::find($id);
-        $data->delete();
-        return redirect()->back();
+        $gallery = Gallery::findOrFail($id);
+        if ($gallery->user_id !== Auth::id() && Auth::user()->usertype !== 'admin') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki izin.');
+        }
+
+        $gallery->delete();
+        return redirect()->back()->with('success', 'Gambar berhasil dihapus.');
     }
 }
