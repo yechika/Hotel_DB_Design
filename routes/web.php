@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/room_details/{id}', [HomeController::class, 'room_details'])
         ->name('room_details');
     Route::post('/add_booking/{id}', [HomeController::class, 'add_booking']);
+    Route::get('/history', [HomeController::class, 'history']);
 });
 
 Route::middleware('auth')->group(function () {
@@ -34,3 +35,6 @@ Route::middleware('auth')->group(function () {
  Route::get('/our_rooms', [HomeController::class, 'our_rooms']);
  Route::get('/hotel_gallery', [HomeController::class, 'hotel_gallery']);
  Route::get('/about_page', [HomeController::class, 'about_page']);
+
+ 
+

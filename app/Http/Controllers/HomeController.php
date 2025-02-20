@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     public function add_booking(Request $request, $id)
     {
-        if (!Auth::check()) { 
+        if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Silakan login untuk melakukan pemesanan.');
         }
 
@@ -29,7 +29,7 @@ class HomeController extends Controller
 
         $startDate = $request->startDate;
         $endDate = $request->endDate;
-        $userId = Auth::id(); 
+        $userId = Auth::id();
 
         $isBooked = Booking::where('room_id', $id)
             ->where('start_date', '<=', $endDate)
@@ -65,5 +65,10 @@ class HomeController extends Controller
     public function about_page()
     {
         return view('home.about_page');
+    }
+    public function history()
+    {
+        $bookings = Booking::where('user_id', Auth::id())->with('room')->get();
+        return view('home.history', compact('bookings'));
     }
 }

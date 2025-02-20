@@ -8,7 +8,7 @@
                <div class="center-desk">
                   <div class="logo">
                      <a href="{{url('/')}}">
-                        <h2 style="font-weight: 700; padding-top: 14px;"
+                        <h2 style="font-weight: 700; padding-top: 8px; font-size: 30px;"
                         >AUREVO</h2>
                      </a>
                   </div>
@@ -34,9 +34,9 @@
                      <li class="nav-item">
                         <a class="nav-link" href="{{ url('hotel_gallery') }}">Gallery</a>
                      </li>
-                     <!-- <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
-                     </li> -->
+                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url('history') }}">History</a>
+                     </li>
                      <!-- <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact Us</a>
                      </li> -->

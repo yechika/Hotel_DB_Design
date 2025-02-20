@@ -24,7 +24,7 @@
                             <div class="center-desk">
                                 <div class="logo">
                                     <a href="{{url('/')}}">
-                                        <h2 style="font-weight: 700; padding-top: 14px;">AUREVO</h2>
+                                        <h2 style="font-weight: 700; padding-top: 14px; font-size: 30px;">AUREVO</h2>
                                     </a>
                                 </div>
                             </div>
@@ -48,6 +48,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ url('hotel_gallery') }}">Gallery</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('history') }}">History</a>
                                     </li>
                                     <!-- <li class="nav-item">
                         <a class="nav-link" href="blog.html">Blog</a>
