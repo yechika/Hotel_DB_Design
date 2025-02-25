@@ -63,6 +63,12 @@
                         Gallery
                     </a>
                 </li>
+                <li >
+                    <a href="{{ url('all_messages') }}">
+                        <i class="icon-writing-whiteboard"></i>
+                        Messages
+                    </a>
+                </li>
             </ul>
             </ul>
         </nav>

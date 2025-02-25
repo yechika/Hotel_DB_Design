@@ -30,11 +30,13 @@ Route::middleware('auth')->group(function () {
      Route::get('/view_gallery', [AdminController::class, 'view_gallery']);
      Route::get('/delete_gallery/{id}', [AdminController::class, 'delete_gallery']);
      Route::post('/upload_gallery', [AdminController::class, 'upload_gallery']);
+     Route::get('/all_messages', [AdminController::class, 'all_messages']);
  });
 
  Route::get('/our_rooms', [HomeController::class, 'our_rooms']);
  Route::get('/hotel_gallery', [HomeController::class, 'hotel_gallery']);
  Route::get('/about_page', [HomeController::class, 'about_page']);
 
+ Route::post('/contact', [HomeController::class, 'contact']);
  
 

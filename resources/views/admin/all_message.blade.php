@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 
-
 <head>
-    @include('admin.css')
-    <style>
+<style>
         .table_deg {
             border: 2px solid white;
             margin: auto;
@@ -26,6 +24,7 @@
             padding: 10px;
         }
     </style>
+    @include('admin.css')
 </head>
 
 <body>
@@ -51,7 +50,7 @@
                         <li><a href="{{url('view_room')}}">View Rooms</a></li>
                     </ul>
                 </li>
-                <li class="active">
+                <li>
                     <a href="{{ url('bookings') }}">
                         <i class="icon-padnote"></i>
                         Bookings
@@ -63,68 +62,33 @@
                         Gallery
                     </a>
                 </li>
-                <li >
+                <li class="active">
                     <a href="{{ url('all_messages') }}">
                         <i class="icon-writing-whiteboard"></i>
                         Messages
                     </a>
                 </li>
             </ul>
-            </ul>
         </nav>
         <div class="page-content">
             <div class="page-header">
                 <div class="container-fluid">
-                    <table class="table_deg">
+                <table class="table_deg">
                         <tr>
-                            <th class="th_deg">Customer name</th>
+                            <th class="th_deg">Name</th>
                             <th class="th_deg">Email</th>
                             <th class="th_deg">Phone</th>
-                            <th class="th_deg">Arrival Date</th>
-                            <th class="th_deg">Leaving Date</th>
-                            <th class="th_deg">Status</th>
-                            <th class="th_deg">Room Title</th>
-                            <th class="th_deg">Price</th>
-                            <th class="th_deg">Image</th>
-                            <th class="th_deg">Delete</th>
-                            <th class="th_deg">Status Update</th>
+                            <th class="th_deg">Message</th>
                         </tr>
-                        @foreach($data as $data)
+                        @foreach ($data as $data)
+                        
                         <tr>
                             <td>{{ $data->user->name }}</td>
                             <td>{{ $data->user->email }}</td>
                             <td>{{ $data->user->phone }}</td>
-                            <td>{{ $data->start_date }}</td>
-                            <td>{{ $data->end_date }}</td>
-                            <td>
-                                @if($data->status == 'Approve')
-                                <span style="color: skyblue;">Approved</span>
-                                @endif
-                                @if($data->status == 'Rejected')
-                                <span style="color: red;">Rejected</span>
-                                @endif
-                                @if($data->status == 'waiting')
-                                <span style="color: yellow;">Waiting</span>
-                                @endif
-                            </td>
-                            <td>{{ $data->room->room_title }}</td>
-                            <td>{{ $data->room->price }}</td>
-                            <td>
-                                <img style="width: 150px;;" src="/room/{{ $data->room->image }}" alt="">
-                            </td>
-                            <td>
-                                <a onclick="return confirm('Are you sure to delete this?')"
-                                    href="{{ url('delete_booking', $data->id) }}" class="btn btn-danger">Delete</a>
-                            </td>
-                            <td>
-                                <span style="padding-bottom: 10px;">
-                                    <a class="btn btn-success" href="{{ url('approve_book', $data->id) }}">Approve</a>
-                                </span>
-                                <span>
-                                    <a class="btn btn-warning" href="{{ url('reject_book', $data->id) }}">Reject</a>
-                                </span>
-                            </td>
+                            <td>{{ $data->message }}</td>
                         </tr>
+                        
                         @endforeach
                     </table>
                 </div>

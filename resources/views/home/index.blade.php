@@ -84,13 +84,20 @@
     
     <!-- end blog -->
     <!--  contact -->
-    <!-- @include('home.contact') -->
+    @include('home.contact')
     <!-- end contact -->
     <!--  footer -->
     @include('home.footer')
     <!-- end footer -->
     <!-- Javascript files-->
-    
+    <script type="text/javascript">
+        $(window).scroll(function(){
+            sessionStorage.scrollTop = $(this).scrollTop();
+        });
+        $(document).ready(function(){
+            $(window).scrollTop(sessionStorage.scrollTop);
+        });
+    </script>
 </body>
 
 </html>

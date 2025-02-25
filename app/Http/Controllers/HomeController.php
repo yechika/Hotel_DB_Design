@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Booking;
 use App\Models\Gallery;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -70,5 +71,22 @@ class HomeController extends Controller
     {
         $bookings = Booking::where('user_id', Auth::id())->with('room')->get();
         return view('home.history', compact('bookings'));
+    }
+    public function contact(Request $request)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'You must be logged in to send a message.');
+        }
+
+        $request->validate([
+            'message' => 'required|string|max:1000',
+        ]);
+
+        Contact::create([
+            'user_id' => Auth::id(),
+            'message' => $request->message,
+        ]);
+
+        return redirect()->back()->with('message', 'Message sent successfully.');
     }
 }
