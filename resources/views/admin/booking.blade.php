@@ -97,7 +97,7 @@
                             <td>{{ $data->start_date }}</td>
                             <td>{{ $data->end_date }}</td>
                             <td>
-                                @if($data->status == 'Approve')
+                                @if($data->status == 'Approved')
                                 <span style="color: skyblue;">Approved</span>
                                 @endif
                                 @if($data->status == 'Rejected')

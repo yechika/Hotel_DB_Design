@@ -58,7 +58,7 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
-            'wifi' => 'required|boolean',
+            'wifi' => 'required|string',
             'type' => 'required|string|max:50',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
@@ -150,7 +150,7 @@ class AdminController extends Controller
     public function approve_book($id)
     {
         $booking = Booking::findOrFail($id);
-        $booking->status = 'Approve';
+        $booking->status = 'Approved';
         $booking->save();
 
         return redirect()->back()->with('success', 'Pemesanan disetujui.');
