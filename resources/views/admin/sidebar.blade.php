@@ -33,7 +33,7 @@
             </li>
             <li>
                 <a href="{{ url('all_messages') }}">
-                    <i class="icon-grid"></i>
+                    <i class="icon-writing-whiteboard"></i>
                     Messages
                 </a>
             </li>
