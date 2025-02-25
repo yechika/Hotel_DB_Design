@@ -33,6 +33,7 @@
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
-        "DB_CONNECTION": "mysql"
+        "DB_CONNECTION": "mysql",
+        "NODE_ENV": "production"
     }
 }
