@@ -81,7 +81,7 @@
     </div>
     <!-- end gallery -->
     <!-- blog -->
-    
+
     <!-- end blog -->
     <!--  contact -->
     @include('home.contact')
@@ -91,10 +91,10 @@
     <!-- end footer -->
     <!-- Javascript files-->
     <script type="text/javascript">
-        $(window).scroll(function(){
+        $(window).scroll(function() {
             sessionStorage.scrollTop = $(this).scrollTop();
         });
-        $(document).ready(function(){
+        $(document).ready(function() {
             $(window).scrollTop(sessionStorage.scrollTop);
         });
     </script>

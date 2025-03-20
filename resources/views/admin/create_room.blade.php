@@ -101,8 +101,8 @@
                             <div class="div_deg">
                                 <label for="">Free Wifi</label>
                                 <select name="wifi" id="">
-                                    <option selected value="yes">Yes</option>
-                                    <option value="no">No</option>
+                                    <option selected value="Yes">Yes</option>
+                                    <option value="No">No</option>
                                 </select>
                             </div>
                             <div class="div_deg">

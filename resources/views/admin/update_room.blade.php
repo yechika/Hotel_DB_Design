@@ -101,8 +101,8 @@
                             <label for="">Free Wifi</label>
                             <select name="wifi" id="">
                                 <option value="{{$data->wifi}}">{{$data->wifi}}</option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
                         <div class="div_deg">
