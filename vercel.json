@@ -16,13 +16,15 @@
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "public": true,
-    "buildCommand": "vite build",
+    "buildCommand": "npm install && vite build && php artisan storage:link",
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
         "APP_TIMEZONE": "Asia/Jakarta",
         "APP_DEBUG": "false",
-        "APP_URL": "https://yourproductionurl.com",
+        "APP_URL": "https://hotel-db-design.vercel.app/",
+        "ASSET_URL": "https://hotel-db-design.vercel.app/",
+        "VITE_APP_URL": "https://hotel-db-design.vercel.app/",
         "APP_KEY": "base64:JbbNC6IXjyMywh9yxPla8nffnzNOjeNWn3/wTnLEl00=",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
@@ -34,6 +36,8 @@
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
         "DB_CONNECTION": "mysql",
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "LIVEWIRE_ASSET_URL": "https://hotel-db-design.vercel.app/build",
+        "LIVEWIRE_VIEW_PATH": "/tmp"
     }
 }
