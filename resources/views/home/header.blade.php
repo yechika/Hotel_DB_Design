@@ -40,31 +40,31 @@
                         <a class="nav-link" href="contact.html">Contact Us</a>
                      </li> -->
                      @if (Route::has('login'))
-                   @auth
-                  <li class="nav-item">
-                   <span style="font-weight: bold; font-size: 18px; color: #000;">|</span>
-                  </li>
-                  <li class="nav-item">
-                   <a href="#" class="nav-link">Welcome, {{ Auth::user()->name }}</a>
-                  </li>
-                  <li class="nav-item" style="padding-right:10px;">
-                   <form method="POST" action="{{ route('logout') }}">
-                     @csrf
-                     <button type="submit" class="btn btn-danger">Logout</button>
-                   </form>
-                  </li>
-               @else
-               <li class="nav-item" style="padding-right:10px;">
-                <a class="btn btn-success" href="{{url('login')}}">Login</a>
-               </li>
+                     @auth
+                     <li class="nav-item">
+                        <span style="font-weight: bold; font-size: 18px; color: #000;">|</span>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#" class="nav-link">Welcome, {{ Auth::user()->name }}</a>
+                     </li>
+                     <li class="nav-item" style="padding-right:10px;">
+                        <form method="POST" action="{{ route('logout') }}">
+                           @csrf
+                           <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
+                     </li>
+                     @else
+                     <li class="nav-item" style="padding-right:10px;">
+                        <a class="btn btn-success" href="{{url('login')}}">Login</a>
+                     </li>
 
-               @if (Route::has('register'))
-               <li class="nav-item">
-               <a class="btn btn-primary" href="{{url('register')}}">Register</a>
-               </li>
-            @endif
-            @endauth
-                @endif
+                     @if (Route::has('register'))
+                     <li class="nav-item">
+                        <a class="btn btn-primary" href="{{url('register')}}">Register</a>
+                     </li>
+                     @endif
+                     @endauth
+                     @endif
 
 
                   </ul>
