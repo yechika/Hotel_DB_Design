@@ -1,4 +1,3 @@
-
 <!-- header inner -->
 <div class="header">
    <div class="container">
@@ -8,8 +7,7 @@
                <div class="center-desk">
                   <div class="logo">
                      <a href="{{url('/')}}">
-                        <h2 style="font-weight: 700; padding-top: 8px; font-size: 30px;"
-                        >AUREVO</h2>
+                        <h2 style="font-weight: 700; padding-top: 8px; font-size: 30px;">AUREVO</h2>
                      </a>
                   </div>
                </div>
@@ -41,22 +39,30 @@
                         <a class="nav-link" href="contact.html">Contact Us</a>
                      </li> -->
                      @if (Route::has('login'))
-                        @auth
-                           <x-app-layout>
-                           </x-app-layout>
-                        @else
-                        <li class="nav-item" style="padding-right:10px;">
-                           <a class="btn btn-success" href="{{url('login')}}">Login</a>
-                        </li>
-
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                           <a class="btn btn-primary" href="{{url('register')}}">Register</a>
-                        </li>
-                        @endif
-                        @endauth
+                     @auth
                      
+                     <li class="nav-item">
+                        <span style="font-weight: bold; font-size: 18px; color: #000;">|</span>
+                     </li>
+                     <li class="nav-item">
+                        <a href="" class="nav-link">Welcome, {{ Auth::user()->name }}</a>
+                     </li>
+                     <li class="nav-item" style="padding-right:10px;">
+                        <a class="btn btn-danger" href="{{url('logout')}}">Logout</a>
+                     </li>
+                     @else
+                     <li class="nav-item" style="padding-right:10px;">
+                        <a class="btn btn-success" href="{{url('login')}}">Login</a>
+                     </li>
+
+                     @if (Route::has('register'))
+                     <li class="nav-item">
+                        <a class="btn btn-primary" href="{{url('register')}}">Register</a>
+                     </li>
                      @endif
+                     @endauth
+                     @endif
+
                   </ul>
                </div>
             </nav>
