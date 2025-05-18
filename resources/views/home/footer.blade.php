@@ -1,5 +1,5 @@
 <footer>
-        <div class="footer">
+        <div class="footer" style="border: none;">
             <div class="container">
                 <div class="row">
                     <div class=" col-md-4">
@@ -42,9 +42,9 @@
                         <div class="col-md-10 offset-md-1">
 
                             <p>
-                                © 2025 All Rights Reserved. Design by <a href="https://html.design/"> Daniel Dirgantara</a>
+                                © 2025 All Rights Reserved. Design by <a href="https://html.design/"> Kelompok 1</a>
                                 <br><br>
-                                Distributed by <a href="https://themewagon.com/" target="_blank">Daniel Dirgantara</a>
+                                Distributed by <a href="https://themewagon.com/" target="_blank">Kelompok 1</a>
                             </p>
 
                         </div>

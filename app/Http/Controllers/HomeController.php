@@ -51,9 +51,25 @@ class HomeController extends Controller
         }
     }
 
-    public function our_rooms()
+    public function our_rooms(Request $request)
     {
-        $room = Room::all();
+        $query = Room::query();
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->where('room_title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+        
+        if ($request->filled('type')) {
+            $roomType = $request->input('type');
+            \Log::info('Filtering by room type:', ['type' => $roomType]);
+            $query->where('room_type', $roomType);
+        }
+
+        $room = $query->paginate(6);
+        
         return view('home.our_rooms', compact('room'));
     }
 

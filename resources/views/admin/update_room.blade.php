@@ -1,127 +1,56 @@
-<!DOCTYPE html>
-<html>
+@extends('admin.index')
 
-<head>
-    <base href="/public">
-    @include('admin.css')
-    <style type="text/css">
-        label{
-            display: inline-block;
-            width: 200px;
-        }
-        .div_deg{
-            padding-top: 30px;
-        }
-        .div_center{
-            text-align: center;
-            padding-top: 40px;
-        }
-    </style>
-</head>
-
-<body>
-    @include('admin.header')
-    <div class="d-flex align-items-stretch">
-        <!-- Sidebar Navigation-->
-        <nav id="sidebar">
-            <!-- Sidebar Header-->
-            <div class="sidebar-header d-flex align-items-center">
-                <!-- <div class="avatar"><img src="admin/img/avatar-6.jpg" alt="..." class="img-fluid rounded-circle"></div> -->
-                <div class="title">
-                    <h1 class="h5">
-                        <div class="font-medium text-base text-gray-800">Welcome, {{ Auth::user()->name }}</div>
-                    </h1>
+@section('content')
+<div class="page-heading">
+    <h3>Update Room</h3>
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-12 col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Update Room Details</h4>
                 </div>
-            </div>
-            <span class="heading">Main</span>
-            <ul class="list-unstyled">
-                <li><a href="/home"> <i class="icon-home"></i>Home </a></li>
-                <li><a href="#exampledropdownDropdown" aria-expanded="true" data-toggle="collapse">
-                        <i class="icon-windows"></i>Hotel Rooms</a>
-                    <ul id="exampledropdownDropdown" class="list-show collapse show ">
-                        <li><a href="{{url('create_room')}}">Add Rooms</a></li>
-                        <li class="active"><a href="{{url('view_room')}}">View Rooms</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="{{ url('bookings') }}">
-                        <i class="icon-padnote"></i>
-                        Bookings
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('view_gallery') }}">
-                        <i class="icon-grid"></i>
-                        Gallery
-                    </a>
-                </li>
-                <li >
-                    <a href="{{ url('all_messages') }}">
-                        <i class="icon-writing-whiteboard"></i>
-                        Messages
-                    </a>
-                </li>
-            </ul>
-            </ul>
-        </nav>
-
-    <div class="page-content">
-        <div class="page-header">
-            <div class="container-fluid">
-
-                <div class="div_center">
-                    <h1 style="
-                        font-size: 30px;
-                        font-weight: bold;
-                    ">Update Room</h1>
-                    <form action="{{url('edit_room', $data->id)}}" method="Post" enctype="multipart/form-data">
+                <div class="card-body">
+                    <form action="{{ url('edit_room', $data->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="div_deg">
-                            <label for="">Room Title</label>
-                            <input type="text" name="title" value="{{$data->room_title}}">
+                        <div class="mb-3 form-group">
+                            <label for="title">Room Title</label>
+                            <input type="text" name="title" id="title" value="{{ $data->room_title }}" class="form-control" required>
                         </div>
-                        <div class="div_deg">
-                            <label for="">Description</label>
-                            <textarea name="description" id="">{{$data->description}}</textarea>
+                        <div class="mb-3 form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" rows="4" class="form-control" required>{{ $data->description }}</textarea>
                         </div>
-                        <div class="div_deg">
-                            <label for="">Price</label>
-                            <input type="number" name="price" value="{{$data->price}}">
+                        <div class="mb-3 form-group">
+                            <label for="price">Price</label>
+                            <input type="number" name="price" id="price" value="{{ $data->price }}" class="form-control" required>
                         </div>
-                        <div class="div_deg">
-                            <label for="">Room Type</label>
-                            <select name="type" id="">
-                                <option value="{{$data->room_type}}">{{$data->room_type}}</option>
-                                <option value="Regular">Regular</option>
-                                <option value="Premium">Premium</option>
-                                <option value="Deluxe">Deluxe</option>
+                        <div class="mb-3 form-group">
+                            <label for="type">Room Type</label>
+                            <select name="type" id="type" class="form-control" required>
+                                <option value="Regular" {{ $data->room_type == 'Regular' ? 'selected' : '' }}>Regular</option>
+                                <option value="Premium" {{ $data->room_type == 'Premium' ? 'selected' : '' }}>Premium</option>
+                                <option value="Deluxe" {{ $data->room_type == 'Deluxe' ? 'selected' : '' }}>Deluxe</option>
                             </select>
                         </div>
-                        <div class="div_deg">
-                            <label for="">Free Wifi</label>
-                            <select name="wifi" id="">
-                                <option value="{{$data->wifi}}">{{$data->wifi}}</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
+                        <div class="mb-3 form-group">
+                            <label for="wifi">Free Wifi</label>
+                            <select name="wifi" id="wifi" class="form-control" required>
+                                <option value="Yes" {{ $data->wifi == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                <option value="No" {{ $data->wifi == 'No' ? 'selected' : '' }}>No</option>
                             </select>
                         </div>
-                        <div class="div_deg">
-                            <label for="">Current Image</label>
-                            <img style="margin: auto;" type="image" src="/room/{{$data->image}}" width="100" alt="">
+                        <div class="mb-3 form-group">
+                            <label for="image">Upload Image</label>
+                            <input type="file" name="image" id="image" class="form-control">
                         </div>
-                        <div class="div_deg">
-                            <label for="">Upload Image</label>
-                            <input type="file" name="image">
-                        </div>
-                        <div class="div_deg">
-                            <input class="btn btn-primary" type="submit" value="Update Room" >
-                        </div>
+                        <button type="submit" class="btn btn-primary">Update Room</button>
+                        <a href="{{ url('view_room') }}" class="btn btn-secondary">Cancel</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    @include('admin.footer')
-</body>
-
-</html>
+</div>
+@endsection

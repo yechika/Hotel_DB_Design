@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
      Route::get('/home', [AdminController::class, 'index'])->name('home');
+     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
      Route::get('/create_room', [AdminController::class, 'create_room']);
      Route::post('/add_room', [AdminController::class, 'add_room']);
      Route::get('/view_room', [AdminController::class, 'view_room']);
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
      Route::get('/delete_gallery/{id}', [AdminController::class, 'delete_gallery']);
      Route::post('/upload_gallery', [AdminController::class, 'upload_gallery']);
      Route::get('/all_messages', [AdminController::class, 'all_messages']);
+     Route::patch('/update_usertype/{id}', [AdminController::class, 'update_usertype']);
+     Route::delete('/delete_user/{id}', [AdminController::class, 'delete_user']);
  });
 
  Route::get('/our_rooms', [HomeController::class, 'our_rooms']);
@@ -38,5 +41,3 @@ Route::middleware('auth')->group(function () {
  Route::get('/about_page', [HomeController::class, 'about_page']);
 
  Route::post('/contact', [HomeController::class, 'contact']);
- 
-
