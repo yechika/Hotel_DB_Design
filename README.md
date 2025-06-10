@@ -1,7 +1,4 @@
-# Hotel DB Design
 
-## 🌐 Live Demo
-[Hotel DB Design](https://hotel-db-design.vercel.app/)
 
 ## 📌 Deskripsi
 Hotel DB Design adalah sebuah sistem reservasi hotel berbasis web yang dibangun menggunakan **Laravel**, **Livewire**, dan **Jetstream**. Aplikasi ini memungkinkan pengguna untuk melakukan pemesanan kamar, melihat galeri hotel, serta mengelola data pengguna dan reservasi.
