@@ -9,6 +9,7 @@ use App\Models\Room;
 use App\Models\Booking;
 use App\Models\Gallery;
 use App\Models\Contact;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -40,7 +41,7 @@ class AdminController extends Controller
 
             $pendingBookingsCount = Booking::where('status', 'Waiting')->count();
 
-            $roomBookings = Room::select('room_type', \DB::raw('COUNT(bookings.id) as booking_count'))
+            $roomBookings = Room::select('room_type', DB::raw('COUNT(bookings.id) as booking_count'))
             ->leftJoin('bookings', 'rooms.id', '=', 'bookings.room_id')
             ->groupBy('room_type')
             ->pluck('booking_count', 'room_type');

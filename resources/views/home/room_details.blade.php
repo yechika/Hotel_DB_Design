@@ -67,7 +67,7 @@
   position: absolute;
   width: 60px;
   height: 3px;
-  background: #red;
+  background: red;
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
