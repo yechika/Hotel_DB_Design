@@ -1,0 +1,95 @@
+ORM -> SQL
+----------
+
+-- 1. Room::findOrFail($id)
+SELECT * FROM rooms WHERE id = $id LIMIT 1;
+
+-- 2. Room::all()
+SELECT * FROM rooms;
+
+-- 3. Gallery::all()
+SELECT * FROM galleries;
+
+-- 4. User::count()
+SELECT COUNT(*) FROM users;
+
+-- 5. Room::count()
+SELECT COUNT(*) FROM rooms;
+
+-- 6. Booking::count()
+SELECT COUNT(*) FROM bookings;
+
+-- 7. Contact::count()
+SELECT COUNT(*) FROM contacts;
+
+-- 8. $room->save()
+INSERT INTO rooms (room_title, description, price, wifi, room_type, image)
+VALUES ('$request->title', '$request->description', $request->price, '$request->wifi', '$request->type', '$imageName');
+
+-- 9. Room::findOrFail($id)->delete()
+DELETE FROM rooms WHERE id = $id;
+
+-- 10. UpdateRoom
+UPDATE rooms
+SET room_title = '$request->title',
+    description = '$request->description',
+    price = $request->price,
+    wifi = '$request->wifi',
+    room_type = '$request->type',
+    image = '$imageName' -- hanya kalau upload gambar baru
+WHERE id = $id;
+
+-- 11. Booking::with('user', 'room')->get()
+SELECT bookings.*, users.*, rooms.*
+FROM bookings
+JOIN users ON bookings.user_id = users.id
+JOIN rooms ON bookings.room_id = rooms.id;
+
+-- 12. Booking::findOrFail($id)->delete()
+DELETE FROM bookings WHERE id = $id;
+
+-- 13. Approve
+UPDATE bookings SET status = 'Approved' WHERE id = $id;
+
+-- 14. Reject
+UPDATE bookings SET status = 'Rejected' WHERE id = $id;
+
+-- 15. Gallery::with('user')->get()
+SELECT galleries.*, users.*
+FROM galleries
+JOIN users ON galleries.user_id = users.id;
+
+-- 16. $gallery->save()
+INSERT INTO galleries (user_id, image)
+VALUES ($userId, '$imageName');
+
+-- 17. Gallery::findOrFail($id)->delete()
+DELETE FROM galleries WHERE id = $id;
+
+-- 18. Contact::all()
+SELECT * FROM contacts;
+
+-- 19. Room::find($id)
+SELECT * FROM rooms WHERE id = $id LIMIT 1;
+
+-- 20. Check room udah di booked atau belum
+SELECT 1
+FROM bookings
+WHERE room_id = $id
+  AND start_date <= '$endDate'
+  AND end_date >= '$startDate'
+LIMIT 1;
+
+-- 21. New booking (user)
+INSERT INTO bookings (room_id, user_id, start_date, end_date)
+VALUES ($id, $userId, '$startDate', '$endDate');
+
+-- 22. Booking history
+SELECT bookings.*, rooms.*
+FROM bookings
+JOIN rooms ON bookings.room_id = rooms.id
+WHERE bookings.user_id = $userId;
+
+-- 23. Create review (message)
+INSERT INTO contacts (user_id, message)
+VALUES ($userId, '$request->message');

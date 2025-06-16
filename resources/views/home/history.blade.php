@@ -4,27 +4,60 @@
 <head>
     @include('home.css')
     <style>
-        .table_deg {
-            border: 2px solid white;
-            margin: auto;
-            width: 50%;
-            text-align: center;
-            margin-top: 40px;
-        }
+    .table_deg {
+        border: 1px solid #ddd;
+        margin: auto;
+        width: 80%;
+        text-align: center;
+        margin-top: 40px;
+        background-color: #fff5f5; /* Light red background for the table */
+        border-radius: 8px; /* Rounded corners */
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
 
-        .th_deg {
-            background-color: skyblue;
-            padding: 15px;
-        }
+    .th_deg {
+        background-color: #d9534f; /* Red theme for the header */
+        color: white;
+        padding: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
 
-        tr {
-            border: 3px solid white;
-        }
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
 
-        td {
-            padding: 10px;
-        }
-    </style>
+    tr:last-child {
+        border-bottom: none;
+    }
+
+    td {
+        padding: 12px;
+        color: #333; /* Darker text for readability */
+    }
+
+    tr:nth-child(even) {
+        background-color: #ffecec; /* Alternate row colors with a light red tint */
+    }
+
+    tr:hover {
+        background-color: #f8d7da; /* Highlight row on hover with a soft red */
+    }
+
+    /* Status-specific row colors */
+    .table-warning {
+        background-color: #fff3cd !important; /* Light yellow for waiting */
+    }
+
+    .table-success {
+        background-color: #d4edda !important; /* Light green for approved */
+    }
+
+    .table-danger {
+        background-color: #f8d7da !important; /* Light red for rejected */
+    }
+</style>
 </head>
 <!-- body -->
 
@@ -58,7 +91,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarsExample04">
-                            <ul class="navbar-nav mr-auto">
+                            <ul class="mr-auto navbar-nav">
                                 <li class="nav-item ">
                                     <a class="nav-link" href="{{url('/')}}">Home</a>
                                 </li>

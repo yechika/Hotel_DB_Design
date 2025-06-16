@@ -14,6 +14,325 @@
       input {
          width: 100%;
       }
+      .our_room {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.col-md-12 {
+  width: 100%;
+  padding: 0 15px;
+}
+
+.col-md-8 {
+  width: 66.66%;
+  padding: 0 15px;
+}
+
+.col-md-4 {
+  width: 33.33%;
+  padding: 0 15px;
+}
+
+/* Title Section */
+.titlepage {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.titlepage h2 {
+  font-size: 42px;
+  color: #222;
+  font-weight: 700;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+}
+
+.titlepage h2:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background: #red;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.titlepage p {
+  font-size: 16px;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Room Card */
+.room {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.room:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Room Image */
+.room_img {
+  position: relative;
+  overflow: hidden;
+}
+
+.room_img img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.room:hover .room_img img {
+  transform: scale(1.05);
+}
+
+/* Price Badge */
+.price_badge {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.price_badge span {
+  font-size: 20px;
+  display: block;
+}
+
+.price_badge small {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Room Details */
+.bed_room {
+  padding: 25px;
+}
+
+.bed_room h3 {
+  color: #333;
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.bed_room p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Room Features */
+.room_features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 8px 15px;
+  border-radius: 50px;
+}
+
+.feature i {
+  color: red;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.feature span {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Booking Form */
+.booking_form {
+  background: #fff;
+  padding: 30px;
+  width: 450px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.booking_form h1 {
+  font-size: 28px;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.booking_form h1:after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background: red;
+  bottom: 0;
+  left: 0;
+}
+
+/* Form Styling */
+.form_group {
+  margin-bottom: 20px;
+}
+
+.form_group label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form_group input[type="text"],
+.form_group input[type="number"],
+.form_group input[type="date"] {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.form_group input[readonly] {
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+}
+
+.form_group input:focus {
+  border-color: red;
+  outline: none;
+}
+
+/* Book Button */
+.book_btn {
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+.book_btn:hover {
+  box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
+
+/* Alert Messages */
+.alert {
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Error List */
+.error_list {
+  margin-bottom: 20px;
+}
+
+.error_list li {
+  color: #dc3545;
+  font-size: 14px;
+  list-style-type: none;
+  margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .col-md-8, .col-md-4 {
+    width: 100%;
+  }
+  
+  .booking_form {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .titlepage h2 {
+    font-size: 32px;
+  }
+  
+  .room_features {
+    flex-direction: column;
+  }
+  
+  .bed_room h3 {
+    font-size: 20px;
+  }
+}
+</style>
+
    </style>
 </head>
 <!-- body -->
@@ -36,7 +355,7 @@
                <div class="center-desk">
                   <div class="logo">
                      <a href="{{url('/')}}">
-                        <h2 style="font-weight: 700; padding-top: 8px; font-size: 30px;"
+                        <h2 style="font-weight: 700; padding-top: 8px; font-size: 30px; color: black;"
                         >AUREVO</h2>
                      </a>
                   </div>
@@ -49,14 +368,14 @@
                   <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarsExample04">
-                  <ul class="navbar-nav mr-auto">
+                  <ul class="mr-auto navbar-nav">
                      <li class="nav-item">
                         <a class="nav-link" href="{{url('/')}}">Home</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{{ url('about_page') }}">About</a>
                      </li>
-                     <li class="nav-item  active">
+                     <li class="nav-item active">
                         <a class="nav-link" href="{{ url('our_rooms') }}">Our room</a>
                      </li>
                      <li class="nav-item">
@@ -67,7 +386,7 @@
                      </li>
                      <!-- <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact Us</a>
-                     </li> -->
+                     </li> --> 
                      @if (Route::has('login'))
                      @auth
                   <li class="nav-item">
@@ -109,91 +428,103 @@
             <div class="col-md-12">
                <div class="titlepage">
                   <h2>Our Room</h2>
-                  <p>Lorem Ipsum available, but the majority have suffered </p>
+                  <p>Experience luxury and comfort—book your room today for an unforgettable stay!</p>
                </div>
             </div>
          </div>
          <div class="row">
             <div class="col-md-8">
                <div id="serv_hover" class="room">
-                  <div style="padding:20px" class="room_img">
-                     <img
-                        style="height: 300px; width: 800px;"
-                        src="room/{{$room->image}}" alt="#" />
+                  <div class="room_img">
+                     <img src="room/{{$room->image}}" alt="#" />
+                     <div class="price_badge">
+                        <span>Rp {{ number_format($room->price, 0, ',', '.') }}</span>
+                        <small>/day</small>
+                     </div>
                   </div>
                   <div class="bed_room">
                      <h3>{{$room->room_title}}</h3>
-                     <p style="padding:12px">{{$room->description}}</p>
-                     <h4 style="padding:12px">Free Wifi: {{$room->wifi}}</h4>
-                     <h4 style="padding:12px">Room Type: {{$room->room_type}}</h4>
-                     <h3 style="padding:12px">Price: Rp {{ number_format($room->price, 0, ',', '.') }}/day</h3>
-                     
+                     <p>{{$room->description}}</p>
+                     <div class="room_features">
+                        <div class="feature">
+                           <i class="fa fa-wifi"></i>
+                           <span>Free Wifi: {{$room->wifi}}</span>
+                        </div>
+                        <div class="feature">
+                           <i class="fa fa-bed"></i>
+                           <span>Room Type: {{$room->room_type}}</span>
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
             <div class="col-md-4">
-               <h1 style="font-size: 40px;">Book Room</h1>
-               <div>
-                  @if(session()->has('message'))
-                  <div class="alert alert-success">
-                     <button type="button" class="close" data-bs-dismiss="alert">x</button>
-                     {{ session()->get('message') }}
+               <div class="booking_form">
+                  <h1>Book Room</h1>
+                  <div>
+                     @if(session()->has('message'))
+                     <div class="alert alert-success">
+                        <button type="button" class="close" data-bs-dismiss="alert">x</button>
+                        {{ session()->get('message') }}
+                     </div>
+                     @elseif(session()->has('messageBooked'))
+                     <div class="alert alert-warning">
+                        <button type="button" class="close" data-bs-dismiss="alert">x</button>
+                        {{ session()->get('messageBooked') }}
+                     </div>
+                     @endif
                   </div>
-                  @elseif(session()->has('messageBooked'))
-                  <div class="alert alert-warning">
-                     <button type="button" class="close" data-bs-dismiss="alert">x</button>
-                     {{ session()->get('messageBooked') }}
+                  @if($errors)
+                  <div class="error_list">
+                     @foreach($errors->all() as $errors)
+                     <li>
+                        {{ $errors }}
+                     </li>
+                     @endforeach
                   </div>
                   @endif
+                  <form action="{{ url('add_booking', $room->id) }}" method="Post">
+                     @csrf
+                     <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                     <div class="form_group">
+                        <label for="">Name</label>
+                        <input type="text" name="name"
+                           @if(Auth::id())
+                           value="{{ Auth::user()->name }}"
+                           @endif
+                           readonly>
+                     </div>
+                     <div class="form_group">
+                        <label for="">Email</label>
+                        <input type="text" name="email"
+                           @if(Auth::id())
+                           value="{{ Auth::user()->email }}"
+                           @endif
+                           readonly>
+                     </div>
+                     <div class="form_group">
+                        <label for="">Phone</label>
+                        <input type="number" name="phone"
+                           @if(Auth::id())
+                           value="{{ Auth::user()->phone }}"
+                           @endif
+                           readonly>
+                     </div>
+                     <div style="display: flex; gap: 2px;">               
+                        <div class="form_group">
+                           <label for="">Start Date</label>
+                           <input type="date" name="startDate" id="startDate" required>
+                        </div>
+                        <div class="form_group">
+                           <label for="">End Date</label>
+                           <input type="date" name="endDate" id="endDate" required>
+                        </div>
+                     </div>
+                     <div class="form_group">
+                        <input type="submit" value="Book Room" class="book_btn">
+                     </div>
+                  </form>
                </div>
-               @if($errors)
-               @foreach($errors->all() as $errors)
-               <li style="color: red;">
-                  {{ $errors }}
-               </li>
-               @endforeach
-               @endif
-               <form action="{{ url('add_booking', $room->id) }}" method="Post">
-                  @csrf
-                  <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                  <div>
-                     <label  for="">Name</label>
-                     <input style="cursor: not-allowed;" type="text" name="name"
-                        @if(Auth::id())
-                        value="{{ Auth::user()->name }}"
-                        @endif
-                        readonly>
-                  </div>
-                  <div>
-                     <label for="">Email</label>
-                     <input style="cursor: not-allowed;" type="text" name="email"
-                        @if(Auth::id())
-                        value="{{ Auth::user()->email }}"
-                        @endif
-                        readonly>
-                  </div>
-                  <div>
-                     <label for="">Phone</label>
-                     <input style="cursor: not-allowed;" type="number" name="phone"
-                        @if(Auth::id())
-                        value="{{ Auth::user()->phone }}"
-                        @endif
-                        readonly>
-                  </div>
-                  <div>
-                     <label for="">Start Date</label>
-                     <input type="date" name="startDate" id="startDate" required>
-                  </div>
-                  <div>
-                     <label for="">End Date</label>
-                     <input type="date" name="endDate" id="endDate" required>
-                  </div>
-                  <div style="padding-top: 20px;">
-                     <input type="submit" value="Book Room" class="btn btn-primary">
-                  </div>
-               </form>
-
-
             </div>
          </div>
       </div>

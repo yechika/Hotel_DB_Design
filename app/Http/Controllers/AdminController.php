@@ -20,13 +20,47 @@ class AdminController extends Controller
 
         $usertype = Auth::user()->usertype;
 
+        $room = collect([
+            Room::where('room_type', 'Regular')->first(),
+            Room::where('room_type', 'Deluxe')->first(),
+            Room::where('room_type', 'Premium')->first()
+        ])->filter();
+
         if ($usertype == 'user') {
             return view('home.index', [
-                'room' => Room::all(),
+                'room' => $room,
                 'gallery' => Gallery::all()
             ]);
         } elseif ($usertype == 'admin') {
-            return view('admin.index');
+            $userCount = \App\Models\User::count();
+            $roomCount = \App\Models\Room::count();
+            $bookingCount = \App\Models\Booking::count();
+            $messageCount = \App\Models\Contact::count();
+            $users = \App\Models\User::all(); 
+
+            $pendingBookingsCount = Booking::where('status', 'Waiting')->count();
+
+            $roomBookings = Room::select('room_type', \DB::raw('COUNT(bookings.id) as booking_count'))
+            ->leftJoin('bookings', 'rooms.id', '=', 'bookings.room_id')
+            ->groupBy('room_type')
+            ->pluck('booking_count', 'room_type');
+
+            $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            $monthlyBookings = [];
+            for ($i = 1; $i <= 12; $i++) {
+                $monthlyBookings[] = Booking::whereRaw('extract(month from start_date::date) = ?', [$i])->count();
+            }
+            return view('admin.dashboard', compact(
+            'userCount',
+            'roomCount',
+            'bookingCount',
+            'messageCount',
+            'users',
+            'pendingBookingsCount',
+            'roomBookings',
+            'months',
+            'monthlyBookings'
+        ));
         }
 
         return redirect()->back();
@@ -34,8 +68,13 @@ class AdminController extends Controller
 
     public function home()
     {
+        $room = collect([
+            Room::where('room_type', 'Regular')->first(),
+            Room::where('room_type', 'Deluxe')->first(),
+            Room::where('room_type', 'Premium')->first()
+        ])->filter();
         return view('home.index', [
-            'room' => Room::all(),
+            'room' => $room,
             'gallery' => Gallery::all()
         ]);
     }
@@ -91,7 +130,9 @@ class AdminController extends Controller
 
     public function room_delete($id)
     {
-        Room::findOrFail($id)->delete();
+        $room = Room::findOrFail($id);
+        $room->bookings()->delete(); 
+        $room->delete();
         return redirect()->back()->with('success', 'Kamar berhasil dihapus.');
     }
 
@@ -206,8 +247,45 @@ class AdminController extends Controller
         $gallery->delete();
         return redirect()->back()->with('success', 'Gambar berhasil dihapus.');
     }
+
     public function all_messages(){
         $data = Contact::all();
         return view('admin.all_message', compact('data'));
+    }
+
+    public function update_usertype(Request $request, $id)
+    {
+        if (Auth::user()->usertype !== 'admin') {
+            return redirect()->back()->with('error', 'Unauthorized access.');
+        }
+
+        $user = User::findOrFail($id);
+        
+        // Prevent changing own usertype
+        if ($user->id === Auth::id()) {
+            return redirect()->back()->with('error', 'You cannot change your own user type.');
+        }
+
+        $user->usertype = $request->usertype;
+        $user->save();
+
+        return redirect()->back()->with('success', 'User type updated successfully.');
+    }
+
+    public function delete_user($id)
+    {
+        if (Auth::user()->usertype !== 'admin') {
+            return redirect()->back()->with('error', 'Unauthorized access.');
+        }
+
+        $user = User::findOrFail($id);
+        
+        // Prevent deleting own account
+        if ($user->id === Auth::id()) {
+            return redirect()->back()->with('error', 'You cannot delete your own account.');
+        }
+
+        $user->delete();
+        return redirect()->back()->with('success', 'User deleted successfully.');
     }
 }

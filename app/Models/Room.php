@@ -16,4 +16,8 @@ class Room extends Model
         'wifi',
         'room_type'
     ];
+    public function bookings()
+    {
+        return $this->hasMany(\App\Models\Booking::class);
+    }
 }

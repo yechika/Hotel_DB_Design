@@ -1,3 +1,54 @@
+<style>
+   .banner_main {
+    padding: 0; /* Remove any padding */
+    margin: 0;  /* Remove any margin */
+    width: 100%;
+}
+
+.carousel,
+.carousel-inner,
+.carousel-item,
+.carousel-item img {
+    width: 100%;
+    height: 950px; /* Optional: make carousel height full viewport height */
+    object-fit: cover; /* Make images cover the container */
+}
+.book_room {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   text-align: center;
+   color: white;
+   z-index: 10;
+   background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+   padding: 50px;
+   border-radius: 10px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.book_room h1 {
+   font-size: 3rem;
+   font-weight: bold;
+   margin-bottom: 15px;
+}
+
+.book_room p {
+   font-size: 1.2rem;
+   margin-bottom: 20px;
+}
+
+.book_btn {
+   display: inline-block;
+   padding: 10px 20px;
+   font-size: 1.2rem;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   text-decoration: none;
+   transition: background-color 0.3s ease;
+}
+</style>
 <section class="banner_main">
    <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -27,32 +78,10 @@
          <span class="sr-only">Next</span>
       </a>
    </div>
-   <div class="booking_ocline">
-      <div class="container">
-         <div class="row">
-            <div class="col-md-5">
-               <div class="book_room">
-                  <h1 style="padding-top: 20px;">Book a Room Online</h1>
-                  <form class="book_now">
-                     <div class="row">
-                        <!-- <div class="col-md-12">
-                                 <span>Arrival</span>
-                                 <img class="date_cua" src="images/date.png">
-                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" name="dd/mm/yyyy">
-                              </div>
-                              <div class="col-md-12">
-                                 <span>Departure</span>
-                                 <img class="date_cua" src="images/date.png">
-                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" name="dd/mm/yyyy">
-                              </div> -->
-                        <div class="col-md-12" style="text-align: center">
-                           <a href="/our_rooms" class="book_btn" style="display: inline-block;">Book Now</a>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
+   <div class="booking_ocline"></div>
+   <div class="book_room">
+      <h1>Welcome to AUREVO</h1>
+      <p>Book a Room Online</p>
+      <a href="/our_rooms" class="book_btn">Book Now</a>
    </div>
 </section>
